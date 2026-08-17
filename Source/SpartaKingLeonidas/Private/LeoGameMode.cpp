@@ -15,8 +15,8 @@ void ALeoGameMode::BeginPlay()
 	for (int32 i = 0; i < SpawnCount; ++i)
 	{
 		const FVector Loc(
-			FMath::RandRange(-2000.f, 2000.f),
-			FMath::RandRange(-2000.f, 2000.f),
+			FMath::RandRange(-1000.f, 1000.f),
+			FMath::RandRange(-1000.f, 1000.f),
 			FMath::RandRange(100.f, 600.f)
 		);
 
