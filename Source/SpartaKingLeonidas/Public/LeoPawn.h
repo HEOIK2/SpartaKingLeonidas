@@ -2,7 +2,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "LeoPawn.generated.h"
+
+class UCapsuleComponent;
+class USkeletalMeshComponent;
+class USpringArmComponent;
+class UCameraComponent;
+
 
 UCLASS()
 class SPARTAKINGLEONIDAS_API ALeoPawn : public APawn
@@ -10,18 +17,27 @@ class SPARTAKINGLEONIDAS_API ALeoPawn : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	ALeoPawn();
 
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UCapsuleComponent* CapsuleComp;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USkeletalMeshComponent* MeshComp;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USpringArmComponent* SpringArmComp;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UCameraComponent* CameraComp;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MoveSpeed = 500.f;
+
+	void Move(const FInputActionValue& value);
+	void Look(const FInputActionValue& value);
 };
